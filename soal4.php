@@ -1,24 +1,28 @@
 <?php
-// fungsi fibonacci
-function fibonacci($kolom, $baris){
-    $bil1 = 0; // angka pertama
-    $bil2 = 1; // angka kedua
-    $fibonacci = ""; // untuk menyimpan hasil
-    for ($i=0; $i < $baris; $i++) { // menentukan jumlah baris
-        for($j = 0;$j < $kolom;$j++){ // menentukan jumlah kolom
-            if($j == 0 & $i == 0)
-                $fibonacci .= $bil1.", ";
-            else if($j == 1 && $i == 0)
-                $fibonacci .= $bil2.", ";
-            else{
-                $fibonacci .= ($bil1 + $bil2).", ";
-                $temporary = $bil1;
-                $bil1 = $bil2;
-                $bil2 = $temporary + $bil2;
-            }
+function pangkat($nilai, $pangkat)
+{
+    if (is_numeric($nilai) and is_int($pangkat)) //pengecekan tipe data argumen
+    {
+        //Jika argumen sesuai, maka jalankan proses fungsi
+        $hasil = 1;
+        for ($i = 1; $i <= $pangkat; $i++) {
+            $hasil = $hasil * $nilai;
         }
-        $fibonacci .="<br>"; // membuat baris baru
+        return $hasil;
+    } else {
+        //Bagian ini akan dijalankan jika tipe data argumen bukan angka
+        return "Tipe data argumen harus berupa angka";
     }
-    return $fibonacci; // mengambalikan data fibonacci
 }
-echo fibonacci(4, 3);
+
+//Test beberapa kasus inputan untuk fungsi pangkat()
+echo pangkat(5, 2);
+echo "<br />";
+echo pangkat('afsori', 2);
+echo "<br />";
+echo pangkat(2, 8);
+echo "<br />";
+echo pangkat('angka', 9);
+echo "<br />";
+echo pangkat("lima", 2);
+echo "<br />";

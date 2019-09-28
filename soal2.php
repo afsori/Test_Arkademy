@@ -1,29 +1,24 @@
 <?php
-session_start();
-$username = 'admin';
-$password = 'admin';
-if (isset($_POST['submit'])) {
-    if ($_POST['username'] == $username && $_POST['password'] == $password) {
-        //Membuat Session
-        $_SESSION["username"] = $username;
-        echo "Anda Berhasil Login $username";
-        /*Jika Ingin Pindah Ke Halaman Lain*/
-        // header("Location: admin.php"); //Pindahkan Kehalaman Admin
+function is_password_valid($password__)
+{
+    if (preg_match("/^(?=.*[A-Z])(?=.*\W)(?=.*\d)(?=.*[a-z])[A-Z0-9a-z\S]{8,}$/", $password__)) {
+        return true;
     } else {
-        // Tampilkan Pesan Error
-        display_login_form();
-        echo '<p>Username Atau Password Tidak Benar</p>';
+        return false;
     }
-} else {
-    display_login_form();
 }
-function display_login_form()
-{ ?>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='post'>
-        <label for="username">username</label>
-        <input type="text" name="username" id="username">
-        <label for="password">password</label>
-        <input type="password" name="password" id="password">
-        <input type="submit" name="submit" value="submit">
-    </form>
-<?php } ?>
+
+function is_username_valid($username__)
+{
+    if (preg_match("/^[a-z]{8}$/", $username__)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+echo is_username_valid("angganur"); //Data Valid | return true
+echo is_username_valid("Angga@2001"); //Data Tidak Valid | return false
+
+echo is_password_valid("Angga@2001"); //Data Valid | return true
+echo is_password_valid("angganur"); //Data Tidak Valid | return false

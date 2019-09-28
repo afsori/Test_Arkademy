@@ -1,71 +1,29 @@
 <?php
-// membuat class biodata
-class Biodata
+function getDataJSON($name, $address, $hobbies, $is_married, $school, $skill, $interest_coding)
 {
-    // menyimpan data dalam array
-    public $data = [];
-    // fungsi nama
-    public function nama($nama)
-    {
-        $this->data['name'] = $nama;
-        return $this;
-    }
-    // fungsi alamat
-    public function alamat($alamat)
-    {
-        $this->data['address'] = $alamat;
-        return $this;
-    }
-    // fungsi hobi
-    public function hobi($hobi = array())
-    {
-        $this->data['hobbies'] = $hobi;
-        return $this;
-    }
+    $data = array(
+        'name' => $name,
+        'address' => $address,
+        'hobbies' => $hobbies,
+        'is_married' => $is_married,
+        'school' => $school,
+        'skills' => $skill,
+        'interest_coding' => $interest_coding
+    );
 
-    // fungsi menikah
-    public function menikah($menikah)
-    {
-        $this->data['is_married'] = $menikah;
-        return $this;
-    }
-
-    // fungsi sekolah
-    public function sekolah($sekolah = array())
-    {
-        $this->data['school'] = $sekolah;
-        return $this;
-    }
-    // fungsi kemampuan
-    public function kemampuan($kemampuan = array())
-    {
-        $this->data['skills'] = $kemampuan;
-        return $this;
-    }
-    // fungsi konvert ke json
-    public function konjson()
-    {
-        return json_encode($this->data, JSON_PRETTY_PRINT);
-    }
+    return json_encode($data);
 }
-$biodata     = new Biodata();
-$nama        = "M. Afsori";
-$alamat        = "Dsn. Sidodadi RT/RW 001/001 Desa Airabang Kec. Ulubelu Tanggamus";
-$hobi         = ['Olahraga', 'Ngoprek Komputer', 'Membaca Berita', 'Ngoding'];
-$sekolah    = [
-    "highSchool"     => "SMK Harapan Bangsa Ulubelu",
-    "university"     => ""
-];
-$kemampuan    = [
-    "Web"        => ['HTML', 'CSS', 'PHP'],
-    "Olahraga"    => ['Sepedah']
-];
-print_r(
-    $biodata->nama($nama)
-        ->alamat($alamat)
-        ->hobi($hobi)
-        ->menikah(false)
-        ->sekolah($sekolah)
-        ->kemampuan($kemampuan)
-        ->konjson()
+
+$name = "Angga Nur Prasetya";
+$address = "Banjarnegara";
+$hobbies = array("olahraga", "koding");
+$is_married = false;
+$skill = array("Backend Developer", "Android Developer");
+$interest_coding = true;
+$school = array(
+    'highSchool' => "SMKN 1 Bawang",
+    'university' => "AMIK DCC Pringsewu"
 );
+
+
+echo getDataJSON($name, $address, $hobbies, $is_married, $school, $skill, $interest_coding);
